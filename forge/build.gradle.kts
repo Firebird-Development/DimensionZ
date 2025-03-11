@@ -1,10 +1,12 @@
 plugins {
 	id("net.minecraftforge.gradle") version("6.0.26")
 	id("org.spongepowered.mixin") version("0.7.+")
+	id("org.parchmentmc.librarian.forgegradle") version("1.+")
 }
 
 minecraft {
-	mappings("official", properties["minecraft_version"] as String)
+//	mappings("official", properties["minecraft_version"] as String)
+	mappings("parchment", "${properties["parchment_mappings_version"]}-${properties["parchment_minecraft_version"]}")
 	reobf = false
 	copyIdeResources.set(true)
 

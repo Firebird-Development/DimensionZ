@@ -2,6 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     java
+	idea
 	id("com.gradleup.shadow") version "9.0.0-beta10" apply false
 }
 

@@ -5,10 +5,10 @@ plugins {
 neoForge {
     version = properties["neoforge_version"] as String
 
-//    parchment {
-//        mappingsVersion = project.parchment_mappings_version
-//        minecraftVersion = project.parchment_minecraft_version
-//    }
+    parchment {
+        mappingsVersion = properties["parchment_mappings_version"] as String
+        minecraftVersion = properties["parchment_minecraft_version"] as String
+    }
 
     runs {
         create("client") {
