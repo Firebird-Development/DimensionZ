@@ -16,4 +16,4 @@ pluginManagement.repositories {
 
 rootProject.name = "dimensionz"
 
-include("common", "fabric", "forge")
+include("common", "fabric", "forge", "neoforge")
