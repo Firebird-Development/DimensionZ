@@ -1,9 +1,12 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import groovy.lang.Closure
+import io.github.pacifistmc.forgix.plugin.ForgixMergeExtension
 
 plugins {
     java
 	idea
 	id("com.gradleup.shadow") version "9.0.0-beta10" apply false
+	id("io.github.pacifistmc.forgix") version "1.2.9"
 }
 
 allprojects {
@@ -48,7 +51,8 @@ subprojects {
 
 	tasks.withType<ShadowJar> {
 		configurations = listOf(project.configurations.getByName("shadowBundle"))
-		archiveClassifier.set("dev-shadow")
+//		archiveClassifier.set("dev-shadow")
+		archiveClassifier.set("")
 	}
 
 	tasks.withType<JavaCompile> {
@@ -95,5 +99,29 @@ subprojects {
 
 	java {
 		withSourcesJar()
+	}
+}
+
+forgix {
+	group = "${properties["maven_group"]}.${properties["mod_id"]}"
+	mergedJarName = "${properties["mod_id"]}-${version}.jar"
+	outputDir = "build/libs/merged"
+
+	fabricContainer = FabricContainer().apply {
+		projectName = "fabric"
+		jarLocation = "build/libs/${properties["mod_id"]}-fabric-${version}.jar"
+		additionalRelocate("dev.firebird.dimensionz.fabric", "dev.firebird.dimensionz")
+	}
+
+	forgeContainer = ForgeContainer().apply {
+		projectName = "forge"
+		jarLocation = "build/libs/${properties["mod_id"]}-forge-${version}.jar"
+		additionalRelocate("dev.firebird.dimensionz.forge", "dev.firebird.dimensionz")
+	}
+
+	neoForgeContainer = NeoForgeContainer().apply {
+		projectName = "neoforge"
+		jarLocation = "build/libs/${properties["mod_id"]}-neoforge-${version}.jar"
+		additionalRelocate("dev.firebird.dimensionz.neoforge", "dev.firebird.dimensionz")
 	}
 }

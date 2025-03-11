@@ -1,6 +1,7 @@
 package dev.firebird.dimensionz.neoforge.client;
 
 import dev.firebird.dimensionz.DimensionZ;
+import dev.firebird.dimensionz.client.DimensionZClient;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;

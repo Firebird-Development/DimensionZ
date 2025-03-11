@@ -1,4 +1,4 @@
-package dev.firebird.fabric;
+package dev.firebird.dimensionz.fabric;
 
 import dev.firebird.dimensionz.DimensionZ;
 import net.fabricmc.api.ModInitializer;

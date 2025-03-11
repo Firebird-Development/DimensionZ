@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     id("net.neoforged.moddev") version("2.0.78")
 }
@@ -28,4 +30,8 @@ neoForge {
 dependencies {
 	common(project(":common", "namedElements")) { isTransitive = false }
 	shadowBundle(project(":common"))
+}
+
+tasks.assemble {
+	dependsOn(tasks.getByName<ShadowJar>("shadowJar"))
 }

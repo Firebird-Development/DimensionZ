@@ -1,4 +1,4 @@
-package dev.firebird.dimensionz.neoforge.client;
+package dev.firebird.dimensionz.client;
 
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;

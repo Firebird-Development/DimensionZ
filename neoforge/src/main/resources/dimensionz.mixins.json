@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "${maven_group}.${mod_id}.fabric.mixin",
+	"package": "${maven_group}.${mod_id}.neoforge.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [],
 	"client": [],

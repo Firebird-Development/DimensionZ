@@ -1,3 +1,6 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
 	id("fabric-loom") version "1.10-SNAPSHOT"
 }
@@ -12,7 +15,6 @@ repositories {
 @Suppress("UnstableApiUsage")
 dependencies {
 	minecraft("net.minecraft:minecraft:${properties["minecraft_version"]}")
-//	mappings(loom.officialMojangMappings())
 	mappings(loom.layered {
 		officialMojangMappings()
 		parchment("org.parchmentmc.data:parchment-${properties["parchment_minecraft_version"]}:${properties["parchment_mappings_version"]}@zip")
@@ -44,4 +46,13 @@ loom {
 			source(sourceSets["main"])
 		}
 	}
+}
+
+tasks.withType<ShadowJar> {
+	archiveClassifier.set("dev-shadow")
+}
+
+tasks.withType<RemapJarTask> {
+	val shadowJar = tasks.getByName<ShadowJar>("shadowJar")
+	inputFile.set(shadowJar.archiveFile)
 }

@@ -1,3 +1,6 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.gradle.kotlin.dsl.getByName
+
 plugins {
 	id("net.minecraftforge.gradle") version("6.0.26")
 	id("org.spongepowered.mixin") version("0.7.+")
@@ -5,7 +8,6 @@ plugins {
 }
 
 minecraft {
-//	mappings("official", properties["minecraft_version"] as String)
 	mappings("parchment", "${properties["parchment_mappings_version"]}-${properties["parchment_minecraft_version"]}")
 	reobf = false
 	copyIdeResources.set(true)
@@ -59,4 +61,8 @@ sourceSets.forEach {
 	val outputDir = layout.buildDirectory.file("sourcesSets/${it.name}").get().asFile
 	it.output.setResourcesDir(outputDir)
 	it.java.destinationDirectory.set(outputDir)
+}
+
+tasks.assemble {
+	dependsOn("shadowJar")
 }

@@ -1,6 +1,6 @@
-package dev.firebird.fabric.client;
+package dev.firebird.dimensionz.fabric.client;
 
-import dev.firebird.dimensionz.neoforge.client.DimensionZClient;
+import dev.firebird.dimensionz.client.DimensionZClient;
 import net.fabricmc.api.ClientModInitializer;
 
 public class DimensionZClientFabric implements ClientModInitializer {
