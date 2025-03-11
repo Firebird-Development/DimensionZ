@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${mod_version}",
+	"name": "${mod_name}",
+	"description": "${mod_description}",
+	"authors": [
+		"${mod_author}",
+		"Kobalt",
+		"Were Fox",
+		"The Panda Oliver"
+	],
+	"license": "${mod_license}",
+	"environment": "*",
+	"entrypoint": {
+		"main": [
+			"dev.firebird.dimensionz.DimensionZ"
+		],
+		"client": [
+			"dev.firebird.dimensionz.client.DimensionZClient"
+		]
+	},
+	"mixins": [
+		"dimensionz-common.mixins.json",
+		"dimensionz.mixins.json"
+	],
+	"depends": {
+		"java": ">=${java_version}",
+		"minecraft": "${fabric_version_range}",
+		"fabricloader": "*",
+		"fabric-api": "*"
+	}
+}
