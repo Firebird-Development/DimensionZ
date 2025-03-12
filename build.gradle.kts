@@ -1,6 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import groovy.lang.Closure
-import io.github.pacifistmc.forgix.plugin.ForgixMergeExtension
 
 plugins {
     java
@@ -17,6 +15,26 @@ allprojects {
 	}
 	group = properties["maven_group"] as String
 	version = "mc${properties["minecraft_version"]}-${properties["mod_version"]}"
+}
+
+forgix {
+	group = "${properties["maven_group"]}.${properties["mod_id"]}"
+	mergedJarName = "${properties["mod_id"]}-${version}.jar"
+	outputDir = "build/libs/merged"
+
+	fabricContainer = FabricContainer().apply {
+		jarLocation = "build/libs/${properties["mod_id"]}-fabric-${version}.jar"
+	}
+
+	forgeContainer = ForgeContainer().apply {
+		jarLocation = "build/libs/${properties["mod_id"]}-forge-${version}.jar"
+	}
+
+	neoForgeContainer = NeoForgeContainer().apply {
+		jarLocation = "build/libs/${properties["mod_id"]}-neoforge-${version}.jar"
+	}
+
+	removeDuplicate("dev.firebird.dimensionz")
 }
 
 subprojects {
@@ -100,28 +118,7 @@ subprojects {
 	java {
 		withSourcesJar()
 	}
-}
 
-forgix {
-	group = "${properties["maven_group"]}.${properties["mod_id"]}"
-	mergedJarName = "${properties["mod_id"]}-${version}.jar"
-	outputDir = "build/libs/merged"
-
-	fabricContainer = FabricContainer().apply {
-		projectName = "fabric"
-		jarLocation = "build/libs/${properties["mod_id"]}-fabric-${version}.jar"
-		additionalRelocate("dev.firebird.dimensionz.fabric", "dev.firebird.dimensionz")
-	}
-
-	forgeContainer = ForgeContainer().apply {
-		projectName = "forge"
-		jarLocation = "build/libs/${properties["mod_id"]}-forge-${version}.jar"
-		additionalRelocate("dev.firebird.dimensionz.forge", "dev.firebird.dimensionz")
-	}
-
-	neoForgeContainer = NeoForgeContainer().apply {
-		projectName = "neoforge"
-		jarLocation = "build/libs/${properties["mod_id"]}-neoforge-${version}.jar"
-		additionalRelocate("dev.firebird.dimensionz.neoforge", "dev.firebird.dimensionz")
-	}
+	tasks.build.get().finalizedBy(rootProject.tasks.getByName("mergeJars"))
+	tasks.assemble.get().finalizedBy(rootProject.tasks.getByName("mergeJars"))
 }
