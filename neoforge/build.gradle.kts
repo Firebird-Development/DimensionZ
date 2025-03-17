@@ -27,6 +27,11 @@ neoForge {
     }
 }
 
+@Suppress("unstableApiUsage")
+configurations {
+	configurations["additionalRuntimeClasspath"].extendsFrom(configurations["common"])
+}
+
 dependencies {
 	common(project(":common", "namedElements")) { isTransitive = false }
 	shadowBundle(project(":common"))

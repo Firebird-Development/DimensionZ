@@ -29,6 +29,10 @@ minecraft {
 	}
 }
 
+configurations {
+	configurations["minecraftLibrary"].extendsFrom(configurations["common"])
+}
+
 repositories {
 	maven("https://maven.minecraftforge.net/")
 }
